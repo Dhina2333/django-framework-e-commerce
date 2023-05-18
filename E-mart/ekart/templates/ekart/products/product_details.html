@@ -1,0 +1,54 @@
+
+{% extends 'ekart/layouts/main.html' %}
+{% block title %}
+Ekart | Products
+{% endblock title %}
+
+{% block content %}
+<section class="bg-light py-4 my-5" style="min-height:600px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="mb-3">  {{products}} Details</h4>
+                <hr style="border-color:#b8bfc2;">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{%url 'home'% }">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{% url 'collections' products.category.name %}">Back</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">{{products}}</li>
+                    </ol>
+                  </nav>
+            </div>
+            <div class="col-4 my-3 pic-box">
+                <link rel="stylesheet" href="style.css" media="screen"/>
+                {% if products.trending %}
+                <div class="hot">Best Selling</div>
+                {% endif %}
+            <img src="{{products.product_image.url}}" class="card-image-top" alt="{{products}}">
+            </div>
+            <div class="col-9 my-3">
+                <h5 style="color: #0F5B78">{{products | upper}}</h5>
+                <P>{{products.vendor}}</P>
+                <p>{{products.description}}</p>
+                 <h6 style="color: red">Current Price: Rs. <s>{{products.original_price}}</s></h6>
+                 <h6 style="color: green">Offer Price  : Rs.{{products.selling_price}}</h6>
+                 <div class="my-3">
+                    {% if products.quantity > 0 %}
+                    <button class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                    {% else %}
+                    <button class="btn btn-secondary"><i class="fa fa-minus"></i> Out Of Stock</button>
+                    {% endif %}
+
+                    <button class="btn btn-success" ><i class="fa fa-heart"></i></button>
+
+                 </div>
+
+            </div>
+
+           
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+   
